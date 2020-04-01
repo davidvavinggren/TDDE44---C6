@@ -1,9 +1,5 @@
-print("hejsan")
+class Contact(object):
 
-def jonas():
-    print("Hej, jag heter Jonas.")
-jonas()
-
-def david():
-    print ("Hej, jag heter david")
-david ()
+    def __init__(self, name):
+        self.name = name
+        self.phone_num = ""
