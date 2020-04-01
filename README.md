@@ -1,2 +1,1 @@
-# TDDE44---C6
-OJ, SÅ KUL DETTA SKA BLI!!!!!!
+
