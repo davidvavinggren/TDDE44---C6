@@ -19,12 +19,25 @@ def random_layout(squares, frame_height, frame_width):
     frame_width  -- Bredden (int) på den Frame som fyrkanterna ligger i
     """
 
+
     # Slumpa ut positioner för alla fyrkanter utan att de hamnar utanför framen
     for square in squares:
         square_size = square.winfo_width()
-        xpos = random.randint(0, frame_width - square_size)
-        ypos = random.randint(0, frame_height - square_size)
-        square.place(x=xpos, y=ypos)
+        square_margin = square_size / 10
+        squares_placed_x = -1
+        squares_placed_y = -1
+        xpos = 0
+        ypos = 0
+        print (square_size)
+        print (xpos + square_margin < frame_width)
+        while xpos + square_margin < frame_width:
+            squares_placed_x += 1
+            xpos += ("""squares_placed_x *""" square_size + square_margin)
+
+            while ypos + square_margin < frame_height:
+                squares_placed_y += 1
+                ypos += ("""squares_placed_y *""" square_size + square_margin)
+                square.place(x=xpos, y=ypos)
 
 
 if __name__ == "__main__":
