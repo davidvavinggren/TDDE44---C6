@@ -12,7 +12,7 @@ p2.add_toy("Blyertspenna")
 p2.kind = "föräldralös"
 
 p3 = Pet("Jonas")
-p3.add_toy("Gaffel")
+#p3.add_toy("Gaffel")
 p3.kind = ("pudel")
 
 list = [p1, p2]
