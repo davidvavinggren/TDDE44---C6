@@ -1,7 +1,8 @@
 import math
 
-class Pet (object):
-    def __init__ (self, name = ""):
+
+class Pet(object):
+    def __init__(self, name=""):
         self.name = name
         self.toy = []
         self.kind = ""
@@ -19,7 +20,7 @@ class Pet (object):
 
 
 class Vector2D(object):
-    def __init__ (self, x, y):
+    def __init__(self, x, y):
         self.x = x
         self.y = y
 
@@ -35,7 +36,7 @@ class Vector2D(object):
         return (self.x, self.y)
 
     def add_to_new(self, v1):
-        return Vector2D (self.x + v1.x, self.y + v1.y)
+        return Vector2D(self.x + v1.x, self.y + v1.y)
 
     def is_longer_than(self, v1):
         return v1.get_length() < self.get_length()
