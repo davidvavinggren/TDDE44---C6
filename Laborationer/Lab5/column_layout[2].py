@@ -28,14 +28,15 @@ def random_layout(squares, frame_height, frame_width):
         x_marginal = (frame_width % square_size) / (max_squares_x - 1)
         y_marginal = (frame_height % square_size) / (max_squares_y - 1)
         if ypos + square_size <= frame_height:
-            square.place(x = xpos, y = ypos)
+            square.place(x=xpos, y=ypos)
             ypos += square_size + y_marginal
         else:
             if xpos + square_size <= frame_width:
                 xpos += square_size + x_marginal
                 ypos = 0
-                square.place(x = xpos, y = ypos)
+                square.place(x=xpos, y=ypos)
                 ypos += square_size + y_marginal
+
 
 if __name__ == "__main__":
     layout_tester = lab5.LayoutTester(random_layout)
