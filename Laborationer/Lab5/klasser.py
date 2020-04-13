@@ -1,16 +1,21 @@
+"""TDDE44 klasser.py."""
+
 import math
 
-class Pet (object):
 
-    def __init__ (self, name = ""):
+class Pet(object):
+    """Skapar husdjur."""
+
+    def __init__(self, name=""):
         """Initiera instansen och skicka med namn."""
         self.name = name
         self.toy = []
         self.kind = ""
 
     def __str__(self):
-        """Printa instansvariabler istället för själva instansen
-        enligt formatet nedan.
+        """Printa instansvariabler istället för själva instansen.
+
+        Det printas enligt formatet nedan.
         """
         string1 = "{} är en {} som inte har några leksaker."
         string2 = "{} är en {} som har följande leksaker: {}"
@@ -25,7 +30,9 @@ class Pet (object):
 
 
 class Vector2D(object):
-    def __init__ (self, x, y):
+    """Skapar 2D-vektorer som objekt."""
+
+    def __init__(self, x, y):
         """Initiera instansen och skicka med x- samt y-koordinat."""
         self.x = x
         self.y = y
@@ -46,11 +53,13 @@ class Vector2D(object):
 
     def add_to_new(self, v1):
         """Addera vektor och returnera ny."""
-        return Vector2D (self.x + v1.x, self.y + v1.y)
+        return Vector2D(self.x + v1.x, self.y + v1.y)
 
     def is_longer_than(self, v1):
-        """Kalla på get_length för att undersöka längder, returnera sant eller
-        falskt."""
+        """Kalla på get_length för att undersöka längder.
+
+        Returnera sant eller falskt.
+        """
         return v1.get_length() < self.get_length()
 
     def create_unit_vector(self):
