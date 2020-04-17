@@ -1,7 +1,3 @@
-file = open("Lorem.txt", "r")
-text_file = file.read()
-file.close()
-
 
 class Text(object):
 
@@ -13,9 +9,34 @@ class Text(object):
         list_of_sentences = []
         for sentence in self.text_split:
             list_of_sentences.append(Sentence(sentence))
+        return list_of_sentences
 
     def count_amount_of_sentences(self):
         return len(self.text_split)
+
+    def count_amount_of_words_tot(self):
+        sum_of_words = 0
+        for sentence in self.create_list_of_sentences():
+            sum_of_words += sentence.count_amount_of_words()
+        return sum_of_words
+
+    def count_amount_of_chars_tot(self):
+        sum_of_chars = 0
+        for sentence in self.create_list_of_sentences():
+            sum_of_chars += sentence.count_amount_of_chars()
+        return sum_of_chars
+
+    def __str__(self):
+        index = 1
+        str1 = "Texten innehåller {} meningar, {} ord/skiljetecken, {} tecken. \n"
+        str2 = "Mening {} "
+        string_to_return = ""
+        for sentence in self.create_list_of_sentences():
+            string_to_return += str2.format(str(index)) + sentence.__str__() + "\n"
+            index +=1
+        return str1.format(self.count_amount_of_sentences(),
+                           self.count_amount_of_words_tot(),
+                           self.count_amount_of_chars_tot()) + string_to_return
 
 
 class Sentence(object):
@@ -36,12 +57,11 @@ class Sentence(object):
     def count_amount_of_chars(self):
         sum_of_chars = 0
         for word in self.create_list_of_words():
-            sum_of_chars += word.count_amount_of_chars()
+            sum_of_chars += word.count_amount_of_tokens()
         return sum_of_chars
 
-    def __str__(self)
-        str = "innehåller" + "{}" +"ord/skiljetecken" + "(" +
-              "{}" + "tecken"  + ")"
+    def __str__(self):
+        str = "innehåller {} ord/skiljetecken ({} tecken)"
         return str.format(self.count_amount_of_words(),
                           self.count_amount_of_chars())
 
@@ -52,3 +72,12 @@ class Token(object):
 
     def count_amount_of_tokens(self):
         return len(self.word)
+
+def Main():
+    file = open("Lorem.txt", "r")
+    text_file = file.read()
+    file.close()
+    text = Text(text_file)
+
+    if __name__ == "__main__":
+        print(text)
