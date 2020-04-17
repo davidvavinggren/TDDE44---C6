@@ -20,11 +20,11 @@ class Text(object):
             sum_of_words += sentence.count_amount_of_words()
         return sum_of_words
 
-    def count_amount_of_chars_tot(self):
-        sum_of_chars = 0
+    def count_amount_of_tokens_tot(self):
+        sum_of_tokens = 0
         for sentence in self.create_list_of_sentences():
-            sum_of_chars += sentence.count_amount_of_chars()
-        return sum_of_chars
+            sum_of_tokens += sentence.count_amount_of_tokens()
+        return sum_of_tokens
 
     def __str__(self):
         index = 1
@@ -36,7 +36,7 @@ class Text(object):
             index +=1
         return str1.format(self.count_amount_of_sentences(),
                            self.count_amount_of_words_tot(),
-                           self.count_amount_of_chars_tot()) + string_to_return
+                           self.count_amount_of_tokens_tot()) + string_to_return
 
 
 class Sentence(object):
@@ -54,16 +54,16 @@ class Sentence(object):
     def count_amount_of_words(self):
         return len(self.split_sentence)
 
-    def count_amount_of_chars(self):
-        sum_of_chars = 0
+    def count_amount_of_tokens(self):
+        sum_of_tokens = 0
         for word in self.create_list_of_words():
-            sum_of_chars += word.count_amount_of_tokens()
-        return sum_of_chars
+            sum_of_tokens += word.count_amount_of_tokens()
+        return sum_of_tokens
 
     def __str__(self):
         str = "innehåller {} ord/skiljetecken ({} tecken)"
         return str.format(self.count_amount_of_words(),
-                          self.count_amount_of_chars())
+                          self.count_amount_of_tokens())
 
 class Token(object):
 
@@ -78,6 +78,7 @@ def Main():
     text_file = file.read()
     file.close()
     text = Text(text_file)
-
     if __name__ == "__main__":
         print(text)
+
+Main()
