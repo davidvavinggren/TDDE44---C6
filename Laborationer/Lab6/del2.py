@@ -53,6 +53,9 @@ class TaskList (object):
 
     def __str__(self):
         print("test str list")
+        if self.task_list == {}:
+            print("Listan är tom")
+            return
         string = ""
         for task in self.task_list.values():
             string += task.__str__()
