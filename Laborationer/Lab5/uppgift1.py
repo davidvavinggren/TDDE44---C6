@@ -17,6 +17,6 @@ p3.kind = ("pudel")
 
 list = [p1, p2]
 
-print(p1)
+print(p1.kind)
 print(p2)
 print(p3)
