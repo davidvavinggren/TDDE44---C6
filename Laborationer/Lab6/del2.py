@@ -1,20 +1,19 @@
 class TodoApp (object):
 
     def __init__(self):
-        self.commands = {"ny":self.new_task(), "visa":self.show_tasks(), "klar":self.mark_done(),
-                                                          "?":self.show_commands()}
+        self.commands = {"ny":self.new_task, "visa":self.show_tasks, "klar":self.mark_done,
+                                                          "?":self.show_commands}
         self.task_list = TaskList()
         self.run()
         #kommando = kommando
 
     def run (self):
-
         while True:
-            input = input("Ange kommando (q=avsluta ?=hjälp) ")
-            if input == "q":
+            user_input = input("Ange kommando (q=avsluta ?=hjälp) ")
+            if user_input == "q":
                 break
             try:
-                self.commands[input]
+                self.commands[user_input]()
 
             except KeyError:
                 print("Inget kommando")
@@ -27,6 +26,7 @@ class TodoApp (object):
         self.task_list.create_task(new_task)
 
     def show_tasks(self):
+        print ("Test show_tasks")
         self.task_list.__str__()
 
     def mark_done(self):
@@ -41,7 +41,8 @@ class TaskList (object):
         self.task_id = len(self.task_list)
 
     def create_task(self, new_task):
-        TaskList[new_task] = Task(new_task, self.task_id)
+        #print("Test")
+        self.task_list[new_task] = Task(new_task, self.task_id)
 
     def mark_done(self):
         self.__str__()
@@ -51,8 +52,9 @@ class TaskList (object):
                 task.mark_done()
 
     def __str__(self):
+        print("test str list")
         string = ""
-        for task in task_list.values():
+        for task in self.task_list.values():
             string += task.__str__()
         return string
 
@@ -67,10 +69,12 @@ class Task(object):
         self.done = True
 
     def __str__(self):
+        print("test str task")
         string = "{}. [{}] {} \n"
         if self.done == True:
             return string.format(self.task_id, "X", self.task_description)
-        return string.format(" ", self.task_description)
+        else:
+            return string.format(self.task_id, " ", self.task_description)
 
 if __name__ == "__main__":
     todo_app = TodoApp()
