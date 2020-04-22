@@ -29,7 +29,7 @@ class TodoApp (object):
         print(self.task_list.__str__())
 
     def mark_done(self):
-        self.task_list.__str__()
+        print(self.task_list.__str__())
         finished_task_id = input("Vilken uppgift ska markeras som klar? ")
         self.task_list.mark_done(int(finished_task_id))
 
@@ -54,11 +54,11 @@ class TaskList (object):
     def __str__(self):
         if self.task_list == {}:
             print("Listan är tom")
-            return
+            return ""
         string = ""
         for task in self.task_list.values():
             string += task.__str__()
-        print(string)
+        return string[:-1]
 
 class Task(object):
 
