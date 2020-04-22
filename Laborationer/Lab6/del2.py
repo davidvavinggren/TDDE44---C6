@@ -72,8 +72,7 @@ class Task(object):
         string = "{}. [{}] {} \n"
         if self.done:
             return string.format(self.task_id, "X", self.task_description)
-        else:
-            return string.format(self.task_id, " ", self.task_description)
+        return string.format(self.task_id, " ", self.task_description)
 
 if __name__ == "__main__":
     todo_app = TodoApp()
