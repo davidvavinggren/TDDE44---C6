@@ -30,7 +30,9 @@ class TodoApp (object):
         self.task_list.__str__()
 
     def mark_done(self):
-        self.task_list.mark_done()
+        self.task_list.__str__()
+        finished_task_id = input("Vilken uppgift ska markeras som klar? ")
+        self.task_list.mark_done(int(finished_task_id))
 
 
 class TaskList (object):
@@ -38,16 +40,15 @@ class TaskList (object):
     def __init__(self):
         #self.task_counter = len(task_list)
         self.task_list = {}
-        self.task_id = len(self.task_list)
+        #self.task_id = len(self.task_list)
 
     def create_task(self, new_task):
         #print("Test")
-        self.task_list[new_task] = Task(new_task, self.task_id)
+        self.task_list[new_task] = Task(new_task, len(self.task_list))
 
-    def mark_done(self):
-        self.__str__()
-        finished_task_id = input("Vilken uppgift ska markeras som klar? ")
-        for task in task_list.values():
+
+    def mark_done(self, finished_task_id):
+        for task in self.task_list.values():
             if task.task_id == finished_task_id:
                 task.mark_done()
 
@@ -59,7 +60,7 @@ class TaskList (object):
         string = ""
         for task in self.task_list.values():
             string += task.__str__()
-        return string
+        print(string)
 
 class Task(object):
 
