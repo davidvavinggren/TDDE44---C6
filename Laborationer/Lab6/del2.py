@@ -1,8 +1,8 @@
 class TodoApp (object):
 
     def __init__(self):
-        self.commands = {"ny":self.new_task, "visa":self.show_tasks, "klar":self.mark_done,
-                                                          "?":self.show_commands}
+        self.commands = {"ny" : self.new_task, "visa" : self.show_tasks,
+                         "klar" : self.mark_done, "?" : self.show_commands}
         self.task_list = TaskList()
         self.run()
         #kommando = kommando
@@ -26,8 +26,7 @@ class TodoApp (object):
         self.task_list.create_task(new_task)
 
     def show_tasks(self):
-        print ("Test show_tasks")
-        self.task_list.__str__()
+        print(self.task_list.__str__())
 
     def mark_done(self):
         self.task_list.__str__()
@@ -53,7 +52,6 @@ class TaskList (object):
                 task.mark_done()
 
     def __str__(self):
-        print("test str list")
         if self.task_list == {}:
             print("Listan är tom")
             return
@@ -73,9 +71,8 @@ class Task(object):
         self.done = True
 
     def __str__(self):
-        print("test str task")
         string = "{}. [{}] {} \n"
-        if self.done == True:
+        if self.done:
             return string.format(self.task_id, "X", self.task_description)
         return string.format(self.task_id, " ", self.task_description)
 
