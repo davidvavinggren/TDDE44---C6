@@ -15,7 +15,7 @@ class TodoApp (object):
         """Kör enligt nedanstående anvisning."""
         # kör loopen alltid såvida inte if-satsen uppfylls
         while True:
-            user_input = input("Ange kommando (q=avsluta ?=hjälp) ")
+            user_input = input("Ange kommando (q=avsluta ?=hjälp): ")
             # stäng ner om man skriver q
             if user_input == "q":
                 break
@@ -24,7 +24,7 @@ class TodoApp (object):
                 self.commands[user_input]()
             # skriv ut om try misslyckas
             except KeyError:
-                print("Inget kommando")
+                print("Inget kommando.")
 
     def show_commands(self):
         """Printa de olika kommandon som finns."""
@@ -33,7 +33,9 @@ class TodoApp (object):
     def new_task(self):
         """Gör ett nytt taskobjekt."""
         new_task = input("Beskriv uppgiften: ")
-        self.task_list.create_task(new_task)
+        confirmation = input("Du skrev {}, är det OK? [j/n]: ".format(new_task))
+        if confirmation == "j":
+            self.task_list.create_task(new_task)
 
     def show_tasks(self):
         """Visa de tasks som lagts till."""
@@ -43,7 +45,10 @@ class TodoApp (object):
         """Skriv ut de som finns och kör mark_done på den utpekade."""
         print(self.task_list)
         finished_task_id = input("Vilken uppgift ska markeras som klar? ")
-        self.task_list.mark_done(int(finished_task_id))
+        try:
+            self.task_list.mark_done(int(finished_task_id))
+        except ValueError:
+            print("Icke giltigt index.")
 
 
 class TaskList (object):
@@ -66,6 +71,8 @@ class TaskList (object):
             # hitta rätt uppgift och kör mark_done på den
             if task.task_id == finished_task_id:
                 task.mark_done()
+            else:
+                print("Icke giltigt index.")
 
     def __str__(self):
         """Printa enligt taskobjektens __str__."""

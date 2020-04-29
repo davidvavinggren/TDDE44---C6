@@ -29,21 +29,21 @@ class Text(object):
             sum_of_words += sentence.count_amount_of_words()
         return sum_of_words
 
-    def count_amount_of_tokens_tot(self):
+    def count_amount_of_chars_tot(self):
         """Beräkna antalet tecken i texten."""
-        sum_of_tokens = 0
+        sum_of_chars = 0
         # För varje mening; addera summan tecken till en totalsumma
         for sentence in self.create_list_of_sentences():
-            sum_of_tokens += sentence.count_amount_of_tokens()
-        return sum_of_tokens
+            sum_of_chars += sentence.count_amount_of_chars()
+        return sum_of_chars
 
     def __str__(self):
         """Printa enligt anvisning."""
         index = 1
-        str1 = "Texten innehåller {} meningar, {} ord/skiljetecken, \
-               {} tecken.\n"
+        str1 = "Texten innehåller {} meningar, {} ord/skiljetecken, {} tecken.\n"
+
         str2 = "Mening {} "
-        string_to_return = ""
+        str_to_return = ""
         # loopa genom meningarna och använd deras räknemetoder
         for sentence in self.create_list_of_sentences():
             str_to_return += (str2.format(str(index)) + sentence.__str__() +
@@ -51,7 +51,7 @@ class Text(object):
             index += 1
         return str1.format(self.count_amount_of_sentences(),
                            self.count_amount_of_words_tot(),
-                           self.count_amount_of_tokens_tot()) + str_to_return
+                           self.count_amount_of_chars_tot()) + str_to_return
 
 
 class Sentence(object):
@@ -74,19 +74,19 @@ class Sentence(object):
         """Räkna ihop alla ord i meningen."""
         return len(self.split_sentence)
 
-    def count_amount_of_tokens(self):
+    def count_amount_of_chars(self):
         """Räkna ihop summan av alla tecken i ordlistan."""
-        sum_of_tokens = 0
+        sum_of_chars = 0
         # loopa genom alla ord i listan
         for word in self.create_list_of_words():
-            sum_of_tokens += word.count_amount_of_tokens()
-        return sum_of_tokens
+            sum_of_chars += word.count_amount_of_chars()
+        return sum_of_chars
 
     def __str__(self):
         """Printa enligt nedan, använd räknemetoderna."""
         str = "innehåller {} ord/skiljetecken ({} tecken)"
         return str.format(self.count_amount_of_words(),
-                          self.count_amount_of_tokens())
+                          self.count_amount_of_chars())
 
 
 class Token(object):
@@ -96,7 +96,7 @@ class Token(object):
         """Initiera och ta in ett ord."""
         self.word = value
 
-    def count_amount_of_tokens(self):
+    def count_amount_of_chars(self):
         """Räkna hur många tecken ett ord har."""
         return len(self.word)
 
