@@ -33,8 +33,8 @@ class TodoApp (object):
     def new_task(self):
         """Gör ett nytt taskobjekt."""
         new_task = input("Beskriv uppgiften: ")
-        confirmation = input("Du skrev {}, är det OK? [j/n]: ".format(new_task))
-        if confirmation == "j":
+        affirmation = input("Du skrev {}, är det OK? [j/n]: ".format(new_task))
+        if affirmation == "j":
             self.task_list.create_task(new_task)
 
     def show_tasks(self):
@@ -107,6 +107,7 @@ class Task(object):
             # skriv ut med kryss om uppgiften är klar annars utan
             return string.format(self.task_id, "X", self.task_description)
         return string.format(self.task_id, " ", self.task_description)
+
 
 if __name__ == "__main__":
     """Huvudfunktion där man kör."""

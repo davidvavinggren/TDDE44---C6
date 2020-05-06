@@ -40,8 +40,8 @@ class Text(object):
     def __str__(self):
         """Printa enligt anvisning."""
         index = 1
-        str1 = "Texten innehåller {} meningar, {} ord/skiljetecken, {} tecken.\n"
-
+        str1 = ("Texten innehåller {} meningar," +
+                "{} ord/skiljetecken, {} tecken.\n")
         str2 = "Mening {} "
         str_to_return = ""
         # loopa genom meningarna och använd deras räknemetoder
@@ -109,6 +109,7 @@ def Main():
     text = Text(text_file)
     if __name__ == "__main__":
         print(text)
+
 
 Main()
 """Kalla på Huvudfunktion där allt körs."""
