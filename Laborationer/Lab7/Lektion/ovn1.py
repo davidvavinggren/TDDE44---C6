@@ -7,7 +7,7 @@ def load_freq_data(filepath):
     Returnerar en lista där varje element i listan är en lista med två element
     med följande struktur: [ord, frekvens]
     """
-    file = open(filepath)
+    file = open("webbnyheter2013_stats.tsv", encoding='utf-8')
     freq_data = []
     for line in file:
         freq_data.append(line.rstrip().split("\t"))
@@ -25,8 +25,8 @@ def word_in_data(word, freq_data):
 
 def find_words_in_file(words, filepath):
     """Skriv ut om orden i words finns i filen med sökvägen filepath."""
+    freq_data = load_freq_data(filepath)
     for word in words:
-        freq_data = load_freq_data(filepath)
         print("{}: {}".format(word, word_in_data(word, freq_data)))
 
 
