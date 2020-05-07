@@ -4,12 +4,23 @@ from med import minimum_edit_distance
 import sys
 
 class SpellingWarning(object):
-    pass
+
+    def __init__(self, text):
+        self.text = text
+
+    def text_modifier(self):
+        text_to_modify = open(self.text, encoding = "utf-8")
+        list_to_modify = text_to_midify.strip("\n").split(" ")
+        return list_to_modify
+
+    def __str__(self):
+        return str(self.text_modifier())
+
 
 class Report(object):
     pass
 
-class WordFreq(object):
+class Lexicon(object):
 
     def __init__(self, lexicon):
         self.lexicon = lexicon
@@ -26,13 +37,18 @@ class WordFreq(object):
         for line in file:
             freq_data.append(line.rstrip().split("\t"))
         file.close()
-
         return freq_data
+
+    def __str__(self):
+        return str(self.load_freq_data(self.lexicon))
+
 
 def main():
     lexicon_name = sys.argv[1]
-    word_freq = WordFreq(lexicon_name)
-    word_freq.load_freq_data(lexicon_name)
-    print(word_freq)
+    lexicon = Lexicon(lexicon_name)
+    lexicon.load_freq_data(lexicon_name)
+    #print(word_freq)
+    spelling_warning = SpellingWarning("kort1.txt")
+    print(spelling_warning)
 
 main()
