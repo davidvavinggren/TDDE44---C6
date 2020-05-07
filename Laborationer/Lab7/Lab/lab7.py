@@ -10,7 +10,7 @@ class SpellingWarning(object):
 
     def text_modifier(self):
         text_to_modify = open(self.text, encoding = "utf-8")
-        list_to_modify = text_to_midify.strip("\n").split(" ")
+        list_to_modify = str(text_to_modify).rstrip("\n").split(" ")
         return list_to_modify
 
     def __str__(self):
@@ -48,7 +48,7 @@ def main():
     lexicon = Lexicon(lexicon_name)
     lexicon.load_freq_data(lexicon_name)
     #print(word_freq)
-    spelling_warning = SpellingWarning("Texter" + "\\" + "kort1.txt")
+    spelling_warning = SpellingWarning("Texter/kort1.txt")
     print(spelling_warning)
 
 main()
