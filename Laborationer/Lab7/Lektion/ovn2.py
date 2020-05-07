@@ -7,7 +7,7 @@ def load_freq_data(filepath):
     Returnerar en lista där varje element i listan är en lista med två element
     med följande struktur: [ord, frekvens]
     """
-    file = open(filepath)
+    file = open(filepath, encoding='utf-8')
     freq_data = []
     for line in file:
         freq_data.append(line.rstrip().split("\t"))
