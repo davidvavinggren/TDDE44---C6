@@ -13,13 +13,13 @@ def random_layout(squares, frame_height, frame_width):
     """
     xpos = 0
     ypos = 0
+    square_size = squares[0].winfo_width()
+    max_squares_x = math.floor(frame_width / square_size)
+    max_squares_y = math.floor(frame_height / square_size)
+    x_marginal = (frame_width % square_size) / (max_squares_x - 1)
+    y_marginal = (frame_height % square_size) / (max_squares_y - 1)
     # loopa genom rutor i listan
     for square in squares:
-        square_size = square.winfo_width()
-        max_squares_x = math.floor(frame_width / square_size)
-        max_squares_y = math.floor(frame_height / square_size)
-        x_marginal = (frame_width % square_size) / (max_squares_x - 1)
-        y_marginal = (frame_height % square_size) / (max_squares_y - 1)
         # sätt in en kvadrat om det finns plats i y-led
         if ypos + square_size <= frame_height:
             square.place(x=xpos, y=ypos)
