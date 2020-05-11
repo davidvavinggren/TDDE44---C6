@@ -8,6 +8,7 @@ class Text(object):
         """Initiera instansen och ta in texten i fråga."""
         self.text = value
         self.text_split = value.split("\n")
+        self.sentence = self.create_list_of_sentences()
 
     def create_list_of_sentences(self):
         """Dela upp texten i meningar och placera meningarna i en lista."""
@@ -25,7 +26,7 @@ class Text(object):
         """Beräkna antalet ord i texten."""
         sum_of_words = 0
         # För varje mening; addera summan av ord till en totalsumma
-        for sentence in self.create_list_of_sentences():
+        for sentence in self.sentence:
             sum_of_words += sentence.count_amount_of_words()
         return sum_of_words
 
@@ -33,7 +34,7 @@ class Text(object):
         """Beräkna antalet tecken i texten."""
         sum_of_chars = 0
         # För varje mening; addera summan tecken till en totalsumma
-        for sentence in self.create_list_of_sentences():
+        for sentence in self.sentence:
             sum_of_chars += sentence.count_amount_of_chars()
         return sum_of_chars
 
@@ -45,7 +46,7 @@ class Text(object):
         str2 = "Mening {} "
         str_to_return = ""
         # loopa genom meningarna och använd deras räknemetoder
-        for sentence in self.create_list_of_sentences():
+        for sentence in self.sentence:
             str_to_return += (str2.format(str(index)) + sentence.__str__() +
                               "\n")
             index += 1
@@ -61,6 +62,7 @@ class Sentence(object):
         """Initiera sentence, ta med mening och skapa en lista med ord."""
         self.sentence = value
         self.split_sentence = self.sentence.split(" ")
+        self.words = self.create_list_of_words()
 
     def create_list_of_words(self):
         """Gör en lista med tokenobjekt och returna den."""
@@ -78,7 +80,7 @@ class Sentence(object):
         """Räkna ihop summan av alla tecken i ordlistan."""
         sum_of_chars = 0
         # loopa genom alla ord i listan
-        for word in self.create_list_of_words():
+        for word in self.words:
             sum_of_chars += word.count_amount_of_chars()
         return sum_of_chars
 

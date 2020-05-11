@@ -48,7 +48,7 @@ def main():
     lexicon = Lexicon(lexicon_name)
     lexicon.load_freq_data(lexicon_name)
     #print(word_freq)
-    spelling_warning = SpellingWarning("Texter/kort1.txt")
+    spelling_warning = SpellingWarning("kort1.txt")
     print(spelling_warning)
 
 main()
