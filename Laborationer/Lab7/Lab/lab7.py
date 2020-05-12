@@ -6,17 +6,10 @@ import sys
 
 class SpellingWarning(object):
 
-    def __init__(self, text, lexicon):
+    def __init__(self, lexicon, word, row_number):
         self.lexicon = lexicon
-        self.file = open(text, "r", encoding = "utf-8")
-        self.text = self.file.read()
-        self.file.close()
-        self.epic_text = self.text_modifier()
-
-    def text_modifier(self):
-        string_to_modify = str(self.text).replace("\n", " ").lower()
-        list_to_modify = re.sub("[\W_]\-", " ", string_to_modify).split(" ")
-        return list_to_modify
+        self.word = word
+        self.row_number = row_number
 
     def comparer(self):
         n = 0
@@ -30,22 +23,47 @@ class SpellingWarning(object):
                     break
                 elif word not in lex_word[0]:
                     #n += 1
-                    print(word) #str(n))
                     edit_distance = minimum_edit_distance(word, lex_word)
                     break
 
     def __str__(self):
-        pass
-        #return str(self.text_modifier())
+        return str(self.word)
 
 
 class Report(object):
-    pass
+
+    def __init__(self, text, lexicon_name):
+        self.file = open(text, "r", encoding = "utf-8")
+        self.text = self.file.readlines()
+        self.file.close()
+        self.spelling_warnings = []
+        self.lexicon = Lexicon(lexicon_name)
+
+    def text_modifier(self, text):
+        string_to_modify = str(text).replace("\n", " ").lower()
+        list_to_modify = re.sub("[\W_]\-", " ", string_to_modify).split(" ")
+        return list_to_modify
+
+    def comparer(self):
+        fixed_list = []
+        row_number = 0
+        for row in self.text:
+            row_number += 1
+            row = self.text_modifier(row)
+            for word in row:
+                if not self.lexicon.is_in_lexicon(word, 10):
+                    self.spelling_warnings.append(SpellingWarning(self.lexicon, word, row_number))
+        return self.spelling_warnings
+
+    def __str__(self):
+        return str(self.text_modifier)
+
 
 class Lexicon(object):
 
-    def __init__(self, lexicon):
-        self.lexicon = lexicon
+    def __init__(self, lexicon_name):
+        self.lexicon = lexicon_name
+        self.fixed_lexicon = self.load_freq_data(lexicon_name)
 
     def load_freq_data(self, filepath):
         """Läs in och returnera frekvensdata från filen med sökvägen filepath.
@@ -61,18 +79,31 @@ class Lexicon(object):
         file.close()
         return freq_data
 
+    def is_in_lexicon(self, word, list_length):
+        i = 0
+        while i < list_length:
+            print(self.fixed_lexicon[i])
+            if word in self.fixed_lexicon[i]:
+                return True
+            elif i == len(self.fixed_lexicon):
+                return False
+            i += 1
+
+
     def __str__(self):
-        return str(self.load_freq_data(self.lexicon))
+        return str(self.fixed_lexicon[0:1000])
 
 
 def main():
     start_time = time()
     lexicon_name = sys.argv[1]
+    text = sys.argv[2]
     lexicon = Lexicon(lexicon_name)
-    print(lexicon.load_freq_data(lexicon_name))
-    #print(word_freq)
-    #spelling_warning = SpellingWarning("kort1.txt", lexicon.load_freq_data(lexicon_name))
-    #spelling_warning.comparer()
+    report = Report(text, lexicon_name)
+    spelling_warnings = report.comparer()
+#    for spelling_warning in spelling_warnings:
+#       print(spelling_warning)
+    #print(lexicon)
     run_time = time() - start_time
     print(str(run_time))
 
