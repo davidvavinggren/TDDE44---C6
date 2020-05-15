@@ -74,7 +74,7 @@ class Report(object):
                     break
                 if not self.is_in_lexicon(word) and word.isalpha():
                     self.spelling_warnings.append(SpellingWarning(self.lexicon, word, row_number, self.list_length))
-        print("¤ Found {} unknown words.".format(len(self.spelling_warnings)))
+        print("¤ Found {} unknown words:".format(len(self.spelling_warnings)))
         return self.spelling_warnings
 
     def save(self):
