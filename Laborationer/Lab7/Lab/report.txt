@@ -1,0 +1,37 @@
+***************************************************************************
+[Line 1] massiv: över, mars, liknande
+[Line 1] utbröt: aldrig, tvingas, terrorgruppen
+[Line 1] medeltida: bäst, kanada
+[Line 1] katedralen: få, finns, länderna
+[Line 1] notre: regeringen, poliserna
+[Line 1] dame: allsvenskan, världscupen, sekunder
+[Line 2] slukade: vi
+[Line 2] byggnadens: sidor, lätt
+[Line 2] spira: göra, egentligen
+[Line 2] omfattande: ska, man
+[Line 2] uppger: olyckan
+[Line 3] skalet: usas, döda, snabbt
+[Line 3] huvudbyggnaden: stora, minst
+[Line 4] totalförstörelse: andra
+[Line 6] notre: regeringen, poliserna
+[Line 6] dames: eu, protesterade, juni
+[Line 6] räddningstjänstens: har
+[Line 7] insatsledare: hon, vi, syrien
+[Line 7] gallet: sett
+[Line 7] katedralen: få, finns, länderna
+[Line 9] tillägger: rad
+[Line 9] huvudtornen: länge
+[Line 10] insatsledaren: sluta
+[Line 10] strukturen: valet, färre
+[Line 10] katedralen: få, finns, länderna
+[Line 10] eldens: han, hade, två
+[Line 11] klocktornen: dagar
+[Line 11] byggnadens: sidor, lätt
+[Line 11] avvärjd: kommer, tidigare, kvinnor
+[Line 13] försvåras: själv, afrika
+[Line 14] utrymmet: viktigt
+[Line 14] katedralen: få, finns, länderna
+[Line 14] uppges: båda, olyckan, fri
+[Line 17] talskatedralen: hade, valet
+[Line 17] jopppaa: namn
+***************************************************************************

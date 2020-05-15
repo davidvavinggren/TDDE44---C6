@@ -6,17 +6,19 @@ import sys
 
 class SpellingWarning(object):
 
-    def __init__(self, lexicon, word, row_number):
+    def __init__(self, lexicon, word, row_number, list_length):
         self.lexicon = lexicon
         self.word = word
         self.row_number = row_number
+        self.list_length = list_length
 
     def suggest(self):
         i = -1
         amount_of_suggestions = 0
         edit_distances = []
         suggestion_list = []
-        for word in self.lexicon:
+        suggestion_string = ""
+        for word in self.lexicon[0:self.list_length]:
             if len(word[0]) == len(self.word):
                 edit_distances.append(minimum_edit_distance(self.word, word[0]))
         #På vilken plats är minsta edit distance?
@@ -24,22 +26,25 @@ class SpellingWarning(object):
             i += 1
             if element == min(edit_distances) and amount_of_suggestions < 3:
                 suggestion_list.append(self.lexicon[i])
-                suggestion_list.append(self.word)
                 amount_of_suggestions += 1
-        return suggestion_list
+        for suggestion in suggestion_list:
+            suggestion_string += suggestion[0] + ", "
+        return suggestion_string[:-2]
 
     def __str__(self):
-        return str()
+        return "[Line {}] {}: {}".format(self.row_number, self.word, self.suggest())
 
 
 class Report(object):
 
-    def __init__(self, text, lexicon):
+    def __init__(self, text, lexicon, list_length, sorted_dict):
         self.file = open(text, "r", encoding = "utf-8")
         self.text = self.file.readlines()
         self.file.close()
         self.spelling_warnings = []
         self.lexicon = lexicon
+        self.list_length = list_length
+        self.sorted_dict = sorted_dict
 
     def text_modifier(self, text):
         string_to_modify = str(text).replace("\n", " ").lower()
@@ -47,10 +52,10 @@ class Report(object):
         list_to_modify.remove("")
         return list_to_modify
 
-    def is_in_lexicon(self, word, list_length):
+    def is_in_lexicon(self, word):
         i = 0
-        while i < list_length:
-            if word in self.lexicon[i]:
+        while i < len(self.sorted_dict):
+            if word in self.sorted_dict.keys():
                 return True
             elif i == len(self.lexicon):
                 return False
@@ -61,31 +66,30 @@ class Report(object):
         for row in self.text:
             row_number += 1
             row = self.text_modifier(row)
-            #print(row)
             for word in row:
                 if word == "":
                     break
-                if not self.is_in_lexicon(word, len(self.lexicon)):
-                    self.spelling_warnings.append(SpellingWarning(self.lexicon, word, row_number))
+                if not self.is_in_lexicon(word) and word.isalpha():
+                    self.spelling_warnings.append(SpellingWarning(self.lexicon, word, row_number, self.list_length))
         print("¤ Found {} unknown words.".format(len(self.spelling_warnings)))
         return self.spelling_warnings
 
     def save(self):
-        txt_file = open(self.lexicon.filepath, "w+")
-        txt_file.write("¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤")
+        txt_file = open("report.txt", "w", encoding = "utf-8")
+        txt_file.write("***************************************************************************\n")
         for spelling_warning in self.spelling_warnings:
-            txt_file.write("[Line {}] {}: {}".format(self.spelling_warning.row_number, self.spelling_warning.word, self.spelling_warning.suggest()))
+            txt_file.write(spelling_warning.__str__() + "\n")
+        txt_file.write("***************************************************************************\n")
         txt_file.close()
 
     def __str__(self):
-        pass
+        return report.save()
 
 
 class Lexicon(object):
 
-    def __init__(self, filepath, list_length):
+    def __init__(self, filepath):
         self.filepath = filepath
-        self.list_length = list_length
 
     def load_freq_data(self):
         """Läs in och returnera frekvensdata från filen med sökvägen filepath.
@@ -96,36 +100,38 @@ class Lexicon(object):
 
         print("¤ Reading {} and looking for unknown words...".format(self.filepath))
         file = open(self.filepath, encoding='utf-8')
-        freq_data = []
-        i = 0
+        freq_data_list = []
+        freq_data_dict = {}
         for line in file:
-            if i < self.list_length:
-                freq_data.append(line.rstrip().split("\t"))
-            i += 1
+            freq_data_list.append(line.rstrip().split("\t"))
+            freq_data_dict[line.rstrip().split("\t")[0]] = line.rstrip().split("\t")[1]
         file.close()
-        return freq_data
+        return freq_data_list, freq_data_dict
 
     def __str__(self):
-        return str(self.lexicon[0:1000])
+        return str(self.lexicon)
 
 
 def main():
     start_time = time()
     lexicon_name = sys.argv[1]
-    text = sys.argv[2]
-    list_length = int(sys.argv[3])
-    lexicon = Lexicon(lexicon_name, list_length)
-    sorted_lexicon = lexicon.load_freq_data()
-    report = Report(text, sorted_lexicon)
+    list_length = int(sys.argv[2])
+    text = sys.argv[3]
+    lexicon = Lexicon(lexicon_name)
+    sorted_data = lexicon.load_freq_data()
+    sorted_lexicon = sorted_data[0]
+    sorted_dict = sorted_data[1]
+    report = Report(text, sorted_lexicon, list_length, sorted_dict)
     spelling_warnings = report.comparer()
-    print("¤ Looking for suggestions for these unknown words:")
     for spelling_warning in spelling_warnings:
         print(spelling_warning, end = " ")
         spelling_warning.suggest()
-    #report = report.save()
-    #print(report)
+    print(report.save())
+    print("¤ Looking for suggestions for the unknown words:")
     run_time = time() - start_time
     print("\n" + "Runtime: " + str(run_time))
 
 
-main()
+
+if __name__ == "__main__":
+    main()
