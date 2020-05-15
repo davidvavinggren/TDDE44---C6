@@ -31,8 +31,11 @@ class SpellingWarning(object):
             suggestion_string += suggestion[0] + ", "
         return suggestion_string[:-2]
 
-    def __str__(self):
+    def write_to_report(self):
         return "[Line {}] {}: {}".format(self.row_number, self.word, self.suggest())
+
+    def __str__(self):
+        return self.word
 
 
 class Report(object):
@@ -78,7 +81,7 @@ class Report(object):
         txt_file = open("report.txt", "w", encoding = "utf-8")
         txt_file.write("***************************************************************************\n")
         for spelling_warning in self.spelling_warnings:
-            txt_file.write(spelling_warning.__str__() + "\n")
+            txt_file.write(spelling_warning.write_to_report() + "\n")
         txt_file.write("***************************************************************************\n")
         txt_file.close()
 
