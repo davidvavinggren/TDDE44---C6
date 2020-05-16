@@ -11,25 +11,40 @@ class SpellingWarning(object):
         self.word = word
         self.row_number = row_number
         self.list_length = list_length
+        self.suggestion_list = []
 
     def suggest(self):
         i = -1
         amount_of_suggestions = 0
-        edit_distances = []
-        suggestion_list = []
         suggestion_string = ""
         for word in self.lexicon[0:self.list_length]:
             if len(word[0]) == len(self.word):
-                edit_distances.append(minimum_edit_distance(self.word, word[0]))
-        #På vilken plats är minsta edit distance?
-        for element in edit_distances:
-            i += 1
-            if element == min(edit_distances) and amount_of_suggestions < 3:
-                suggestion_list.append(self.lexicon[i])
-                amount_of_suggestions += 1
-        for suggestion in suggestion_list:
-            suggestion_string += suggestion[0] + ", "
+                self.suggestion_list.append([word[0], minimum_edit_distance(self.word, word[0])])
+        if not self.get_3_suggestions():
+            return "Found no suggestions with the same length."
+        for word in self.get_3_suggestions():
+            suggestion_string += word[0] + ", "
         return suggestion_string[:-2]
+
+    def get_3_suggestions(self):
+        try:
+            list_in_progress = self.suggestion_list.copy()
+            suggestion = []
+            min_value_pos = 0
+            min_value = 0
+            for k in range (3):
+                i = -1
+                min_value = self.suggestion_list[0][1]
+                for tuple in list_in_progress:
+                    i += 1
+                    if tuple[1] < min_value:
+                        min_value = tuple[1]
+                        min_value_pos = i
+                suggestion.append(list_in_progress[min_value_pos])
+                list_in_progress.remove(list_in_progress[min_value_pos])
+        except IndexError:
+            return
+        return suggestion
 
     def write_to_report(self):
         return "[Line {}] {}: {}".format(self.row_number, self.word, self.suggest())
@@ -66,6 +81,7 @@ class Report(object):
             i += 1
 
     def comparer(self):
+        print("¤ Looking for unknown words in {}".format(self.text_name))
         row_number = 0
         for row in self.text:
             row_number += 1
@@ -75,19 +91,23 @@ class Report(object):
                     break
                 if not self.is_in_lexicon(word) and word.isalpha():
                     self.spelling_warnings.append(SpellingWarning(self.lexicon, word, row_number, self.list_length))
-        print("¤ Found {} unknown words:".format(len(self.spelling_warnings)))
+        print("¤ Found {} unknown words.".format(len(self.spelling_warnings)))
         return self.spelling_warnings
 
-    def save(self):
-        txt_file = open("report_" + self.text_name + "txt", "w", encoding = "utf-8")
+    def save(self, start_time):
+        self.comparer()
+        txt_file = open("report_" + self.text_name, "w", encoding = "utf-8")
         txt_file.write("***************************************************************************\n")
         for spelling_warning in self.spelling_warnings:
             txt_file.write(spelling_warning.write_to_report() + "\n")
+        run_time = time() - start_time
+        txt_file.write("Time to write report: " + str(run_time) + "\n")
         txt_file.write("***************************************************************************\n")
         txt_file.close()
+        return txt_file
 
     def __str__(self):
-        return report.save()
+        return "report_{}".format(self.text_name)
 
 
 class Lexicon(object):
@@ -102,7 +122,7 @@ class Lexicon(object):
         med följande struktur: [ord, frekvens]
         """
 
-        print("¤ Reading {} and looking for unknown words...".format(self.filepath))
+        print("¤ Reading lexicon {}".format(self.filepath))
         file = open(self.filepath, encoding='utf-8')
         freq_data_list = []
         freq_data_dict = {}
@@ -130,8 +150,10 @@ def main():
         report = Report(text, sorted_lexicon, list_length, sorted_dict)
         list_of_reports.append(report)
     for report in list_of_reports:
-        report.save()
-    print("¤ Looking for suggestions for the unknown words:")
+        report.save(start_time)
+    print("¤ Suggestions written in reports: ")
+    for report in list_of_reports:
+        print(report)
     run_time = time() - start_time
     print("\n" + "Runtime: " + str(run_time))
 

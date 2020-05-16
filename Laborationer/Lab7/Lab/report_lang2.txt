@@ -1,0 +1,35 @@
+***************************************************************************
+[Line 6] såmmaren: sommaren, måndagen, söndagen
+[Line 12] nogon: någon, något, några
+[Line 12] sekerhetskonroller: Found no suggestions with the same length.
+[Line 16] säkerhetslag: undersökning, tillräckligt, naturligtvis
+[Line 20] åm: om, år, åt
+[Line 26] säkerhetslag: undersökning, tillräckligt, naturligtvis
+[Line 26] tplkats: lyckats, platsen, platser
+[Line 32] finlendska: ekonomiska, europeiska, viktigaste
+[Line 41] urustning: utredning, anledning, president
+[Line 42] chefleden: president, verkligen, marknaden
+[Line 45] utrycks: utanför, förstås, försöka
+[Line 49] heltäckning: utredningen, tillsammans, regeringens
+[Line 51] vraa: vara, fram, våra
+[Line 56] kinaforskare: undersökning, tillräckligt, naturligtvis
+[Line 57] melllan: polisen, handlar, stället
+[Line 57] föertag: företag, förslag, förstås
+[Line 57] mde: det, med, den
+[Line 57] förgreingar: ytterligare, utredningen, regeringens
+[Line 58] helkinesiska: utvecklingen, tillräckligt, naturligtvis
+[Line 65] doterbolag: regeringen, ordförande, fortsätter
+[Line 70] huvukontor: fortsätter, resultatet, washington
+[Line 71] glåbala: sociala, samband, slutade
+[Line 71] utvädrera: föräldrar, utredning, miljarder
+[Line 72] skrivr: skriva, syrien, kräver
+[Line 74] prosesser: professor, problemet, president
+[Line 75] affärsemligheter: Found no suggestions with the same length.
+[Line 82] kinesisika: ekonomiska, europeiska, misstänkta
+[Line 82] myndihgeter: myndigheter, möjligheter, rättigheter
+[Line 85] avlyssnande: fortfarande, ytterligare, amerikanska
+[Line 86] internationellla: Found no suggestions with the same length.
+[Line 86] teknikprodukter: Found no suggestions with the same length.
+[Line 90] ennligtt: nämligen, sveriges, faktiskt
+[Line 90] lysne: måste, länge, henne
+***************************************************************************
