@@ -126,11 +126,12 @@ def main():
     sorted_dict = sorted_data[1]
     report = Report(text, sorted_lexicon, list_length, sorted_dict)
     spelling_warnings = report.comparer()
+    print("¤ Looking for suggestions for the unknown words:")
     for spelling_warning in spelling_warnings:
         print(spelling_warning, end = " ")
         spelling_warning.suggest()
     print(report.save())
-    print("¤ Looking for suggestions for the unknown words:")
+
     run_time = time() - start_time
     print("\n" + "Runtime: " + str(run_time))
 
