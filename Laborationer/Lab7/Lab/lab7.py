@@ -18,8 +18,8 @@ class SpellingWarning(object):
         amount_of_suggestions = 0
         suggestion_string = ""
         for word in self.lexicon[0:self.list_length]:
-            if len(word[0]) == len(self.word):
-                self.suggestion_list.append([word[0], minimum_edit_distance(self.word, word[0])])
+            #if len(word[0]) == len(self.word):
+            self.suggestion_list.append([word[0], minimum_edit_distance(self.word, word[0])])
         if not self.get_3_suggestions():
             return "Found no suggestions with the same length."
         for word in self.get_3_suggestions():
