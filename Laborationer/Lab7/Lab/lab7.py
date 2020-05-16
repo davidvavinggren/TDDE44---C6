@@ -6,7 +6,7 @@ import sys
 
 class SpellingWarning(object):
 
-    def __init__(self, lexicon, word, row_number):
+    def __init__(self, lexicon, word, row_number, list_length):
         self.lexicon = lexicon
         self.word = word
         self.row_number = row_number
