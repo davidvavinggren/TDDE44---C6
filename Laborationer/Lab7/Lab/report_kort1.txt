@@ -1,9 +1,17 @@
 ***************************************************************************
+[Line 2] byggnadens: egentligen, regeringen, åtminstone
 [Line 4] totalförstörelse: Found no suggestions with the same length.
+[Line 6] dames: dagen, samma, fanns
+[Line 6] räddningstjänstens: Found no suggestions with the same length.
+[Line 7] insatsledare: naturligtvis, verksamheten, utvecklingen
 [Line 7] gallet: fallet, gäller, vilket
-[Line 9] huvudtornen: situationen, utredningen, presidenten
-[Line 11] klocktornen: situationen, regeringens, universitet
+[Line 9] huvudtornen: visserligen, uppfattning, förmodligen
+[Line 10] insatsledaren: Found no suggestions with the same length.
+[Line 11] klocktornen: fortfarande, visserligen, motsvarande
+[Line 11] byggnadens: egentligen, regeringen, åtminstone
+[Line 11] avvärjd: används, använda, världen
+[Line 13] släckningsarbetet: Found no suggestions with the same length.
 [Line 17] talskatedralen: Found no suggestions with the same length.
-[Line 17] jopppaa: uppdrag, sociala, rapport
-Time to write report: 6.618930101394653
+[Line 17] jopppaa: uppsala, gruppen, sociala
+Time to write report: 0.47225356101989746
 ***************************************************************************
