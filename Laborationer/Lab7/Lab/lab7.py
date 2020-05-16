@@ -42,6 +42,7 @@ class Report(object):
 
     def __init__(self, text, lexicon, list_length, sorted_dict):
         self.file = open(text, "r", encoding = "utf-8")
+        self.text_name = text
         self.text = self.file.readlines()
         self.file.close()
         self.spelling_warnings = []
@@ -78,7 +79,7 @@ class Report(object):
         return self.spelling_warnings
 
     def save(self):
-        txt_file = open("report.txt", "w", encoding = "utf-8")
+        txt_file = open("report_" + self.text_name + "txt", "w", encoding = "utf-8")
         txt_file.write("***************************************************************************\n")
         for spelling_warning in self.spelling_warnings:
             txt_file.write(spelling_warning.write_to_report() + "\n")
@@ -124,12 +125,12 @@ def main():
     sorted_data = lexicon.load_freq_data()
     sorted_lexicon = sorted_data[0]
     sorted_dict = sorted_data[1]
-    report = Report(text, sorted_lexicon, list_length, sorted_dict)
-    spelling_warnings = report.comparer()
-    for spelling_warning in spelling_warnings:
-        print(spelling_warning, end = " ")
-        spelling_warning.suggest()
-    print(report.save())
+    list_of_reports = []
+    for text in sys.argv[3:]:
+        report = Report(text, sorted_lexicon, list_length, sorted_dict)
+        list_of_reports.append(report)
+    for report in list_of_reports:
+        report.save()
     print("¤ Looking for suggestions for the unknown words:")
     run_time = time() - start_time
     print("\n" + "Runtime: " + str(run_time))
