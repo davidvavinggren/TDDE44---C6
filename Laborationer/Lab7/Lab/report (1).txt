@@ -1,0 +1,35 @@
+***************************************************************************
+[Line 6] såmmaren: över
+[Line 12] nogon: de
+[Line 12] sekerhetskonroller: i
+[Line 16] säkerhetslag: det
+[Line 20] åm: en, av, var
+[Line 26] säkerhetslag: det
+[Line 26] tplkats: blev
+[Line 32] finlendska: på, av
+[Line 41] urustning: ha
+[Line 42] chefleden: en, är, till
+[Line 45] utrycks: de, enligt, vara
+[Line 49] heltäckning: har
+[Line 51] vraa: som, vi, än
+[Line 56] kinaforskare: det
+[Line 57] melllan: som, är, har
+[Line 57] föertag: men
+[Line 57] mde: och, en, är
+[Line 57] förgreingar: att, har
+[Line 58] helkinesiska: i, att, och
+[Line 65] doterbolag: i, det, är
+[Line 70] huvukontor: och, för, vi
+[Line 71] glåbala: skulle
+[Line 71] utvädrera: kan, ha
+[Line 72] skrivr: kom
+[Line 74] prosesser: eller
+[Line 75] affärsemligheter:
+[Line 82] kinesisika: på
+[Line 82] myndihgeter: för
+[Line 85] avlyssnande: i, på
+[Line 86] internationellla:
+[Line 86] teknikprodukter: i
+[Line 90] ennligtt: ha
+[Line 90] lysne: har, andra, två
+***************************************************************************

@@ -6,7 +6,7 @@ import sys
 
 class SpellingWarning(object):
 
-    def __init__(self, lexicon, word, row_number, list_length):
+    def __init__(self, lexicon, word, row_number):
         self.lexicon = lexicon
         self.word = word
         self.row_number = row_number
@@ -86,6 +86,7 @@ class Report(object):
         for row in self.text:
             row_number += 1
             row = self.text_modifier(row)
+            #print(row)
             for word in row:
                 if word == "":
                     break
