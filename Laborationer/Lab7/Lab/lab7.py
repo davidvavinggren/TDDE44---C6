@@ -49,9 +49,6 @@ class SpellingWarning(object):
     def write_to_report(self):
         return "[Line {}] {}: {}".format(self.row_number, self.word, self.suggest())
 
-    def __str__(self):
-        return self.word
-
 
 class Report(object):
 
@@ -105,7 +102,6 @@ class Report(object):
         txt_file.write("Time to write report: " + str(run_time) + "\n")
         txt_file.write("***************************************************************************\n")
         txt_file.close()
-        return txt_file
 
     def __str__(self):
         return "report_{}".format(self.text_name)
@@ -132,9 +128,6 @@ class Lexicon(object):
             freq_data_dict[line.rstrip().split("\t")[0]] = line.rstrip().split("\t")[1]
         file.close()
         return freq_data_list, freq_data_dict
-
-    def __str__(self):
-        return str(self.lexicon)
 
 
 def main():
