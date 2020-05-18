@@ -1,0 +1,9 @@
+***************************************************************************
+[Line 4] totalförstörelse: Found no suggestions with the same length.
+[Line 7] gallet: fallet, gäller, vilket
+[Line 9] huvudtornen: situationen, utredningen, presidenten
+[Line 11] klocktornen: situationen, regeringens, universitet
+[Line 17] talskatedralen: Found no suggestions with the same length.
+[Line 17] jopppaa: uppdrag, sociala, rapport
+Time to write report: 6.618930101394653
+***************************************************************************
