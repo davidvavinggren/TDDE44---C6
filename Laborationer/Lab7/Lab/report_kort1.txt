@@ -13,5 +13,5 @@
 [Line 13] släckningsarbetet: Found no suggestions with the same length.
 [Line 17] talskatedralen: Found no suggestions with the same length.
 [Line 17] jopppaa: uppsala, gruppen, sociala
-Time to write report: 1.1869354248046875
+Time to write report: 2.0851857662200928
 *****************************************************************************************

@@ -71,10 +71,6 @@ class SpellingWarning(object):
                                          self.word,
                                          self.suggest())
 
-    def __str__(self):
-        """Skirv ut vilket ord som undersöks."""
-        return self.word
-
 
 class Report(object):
     """Klassen Report."""
@@ -150,7 +146,6 @@ class Report(object):
                        "*******************************" +
                        "***************************\n")
         txt_file.close()
-        return txt_file
 
     def __str__(self):
         """Skicka vidare rapportens namn."""
@@ -178,10 +173,6 @@ class Lexicon(object):
             freq_data_dict[line[0]] = line
         file.close()
         return freq_data_list, freq_data_dict
-
-    def __str__(self):
-        """Skriv ut lexikonet som en sträng när det printas."""
-        return str(self.lexicon)
 
 
 def main():
