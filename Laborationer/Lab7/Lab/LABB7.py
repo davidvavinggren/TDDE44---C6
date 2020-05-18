@@ -3,7 +3,6 @@
 
 from time import time
 import re
-import argparse
 from med import minimum_edit_distance
 import sys
 
@@ -105,7 +104,7 @@ class Report(object):
             # Returnera sant om ordet finns.
             if word in self.sorted_dict.keys():
                 return True
-            # Returnerna falskt om ordet inte finns.
+            # Returnera falskt om ordet inte finns.
             elif i == len(self.lexicon):
                 return False
             i += 1
