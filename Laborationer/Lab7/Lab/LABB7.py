@@ -80,7 +80,7 @@ class Report(object):
 
     def __init__(self, text, lexicon, list_length, sorted_dict):
         """Initiera Report med nedanstående instansvariabler."""
-        self.file = open(text, "r", encoding = "utf-8")
+        self.file = open(text, "r", encoding="utf-8")
         self.text_name = text
         self.text = self.file.readlines()
         self.file.close()
@@ -117,7 +117,6 @@ class Report(object):
         for row in self.text:
             row_number += 1
             row = self.text_modifier(row)
-            #print(row)
             # Ta varje ord i den modifierade raden och anropa is_in_lexicon.
             # Skapa varning beroende på returen.
             for word in row:
@@ -208,7 +207,6 @@ def main():
         print(report)
     run_time = time() - start_time
     print("\n" + "Runtime: " + str(run_time))
-
 
 
 if __name__ == "__main__":
