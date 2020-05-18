@@ -72,7 +72,7 @@ class SpellingWarning(object):
                                          self.suggest())
 
     def __str__(self):
-        """Skirv ut vilket ord som undersöks."""
+        """Skriv ut vilket ord som undersöks."""
         return self.word
 
 
@@ -89,7 +89,7 @@ class Report(object):
         self.lexicon = lexicon
         self.list_length = list_length
         self.sorted_dict = sorted_dict
-        
+
     def text_modifier(self, text):
         """Modifiera raden som ska rättas."""
         string_to_modify = str(text).replace("\n", " ").lower()
