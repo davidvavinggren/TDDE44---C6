@@ -16,7 +16,7 @@ class SpellingWarning(object):
         self.lexicon = lexicon
         self.word = word
         self.row_number = row_number
-@ -14,49 +20,68 @@ class SpellingWarning(object):
+        self.list_length = list_length
         self.suggestion_list = []
 
     def suggest(self):
@@ -27,7 +27,9 @@ class SpellingWarning(object):
         # Jämför orden i lexikonet mot ordet i fråga.
         for word in self.lexicon[0:self.list_length]:
             #if len(word[0]) == len(self.word):
-            self.suggestion_list.append([word[0], minimum_edit_distance(self.word, word[0])])
+            self.suggestion_list.append([word[0],
+                                        minimum_edit_distance(self.word,
+                                                              word[0])])
             # Om de är lika långa, beräkna edit distance och lägg till ordet
             # tillsammans med edit distance i self.suggestion_list.
             if len(word[0]) == len(self.word):
@@ -69,7 +71,9 @@ class SpellingWarning(object):
         return suggestion
 
     def write_to_report(self):
-        return "[Line {}] {}: {}".format(self.row_number, self.word, self.suggest())
+        return "[Line {}] {}: {}".format(self.row_number,
+                                         self.word,
+                                         self.suggest())
         """Skriv in relevant information till rapporten."""
         return "[Line {}] {}: {}".format(self.row_number,
                                          self.word,
@@ -84,13 +88,14 @@ class Report(object):
     """Klassen Report."""
 
     def __init__(self, text, lexicon, list_length, sorted_dict):
-        self.file = open(text, "r", encoding = "utf-8")
         """Initiera Report med nedanstående instansvariabler."""
-        self.file = open(text, "r", encoding="utf-8")
+        self.file = open(text, "r", encoding = "utf-8")
         self.text_name = text
         self.text = self.file.readlines()
         self.file.close()
-@ -66,78 +91,101 @@ class Report(object):
+        self.spelling_warnings = []
+        self.lexicon = lexicon_name
+        self.list_length = list_length
         self.sorted_dict = sorted_dict
 
     def text_modifier(self, text):
@@ -130,7 +135,6 @@ class Report(object):
                     break
                 # Om det inte är en tom sträng.
                 if not self.is_in_lexicon(word) and word.isalpha():
-                    self.spelling_warnings.append(SpellingWarning(self.lexicon, word, row_number, self.list_length))
                     self.spelling_warnings.append(SpellingWarning(
                                                   self.lexicon,
                                                   word,
@@ -142,8 +146,6 @@ class Report(object):
     def save(self, start_time):
         """Ta in spelling_warnings och skriv in förslag i rapporten."""
         self.comparer()
-        txt_file = open("report_" + self.text_name, "w", encoding = "utf-8")
-        txt_file.write("***************************************************************************\n")
         txt_file = open("report_" + self.text_name, "w", encoding="utf-8")
         txt_file.write("*******************************" +
                        "*******************************" +
@@ -153,7 +155,6 @@ class Report(object):
             txt_file.write(spelling_warning.write_to_report() + "\n")
         run_time = time() - start_time
         txt_file.write("Time to write report: " + str(run_time) + "\n")
-        txt_file.write("***************************************************************************\n")
         txt_file.write("*******************************" +
                        "*******************************" +
                        "***************************\n")
@@ -173,12 +174,6 @@ class Lexicon(object):
         self.filepath = filepath
 
     def load_freq_data(self):
-        """Läs in och returnera frekvensdata från filen med sökvägen filepath.
-
-        Returnerar en lista där varje element i listan är en lista med två element
-        med följande struktur: [ord, frekvens]
-        """
-
         """Skapa en lista och ett dict av lexikonet."""
         print("¤ Reading lexicon {}".format(self.filepath))
         file = open(self.filepath, encoding='utf-8')
@@ -187,8 +182,6 @@ class Lexicon(object):
         # Behandla varje rad i lexikonet så att de blir element i en
         # lista/dict.
         for line in file:
-            freq_data_list.append(line.rstrip().split("\t"))
-            freq_data_dict[line.rstrip().split("\t")[0]] = line.rstrip().split("\t")[1]
             line = line.rstrip().split("\t")
             freq_data_list.append(line)
             freq_data_dict[line[0]] = line
@@ -205,7 +198,6 @@ def main():
     start_time = time()
     lexicon_name = sys.argv[1]
     list_length = int(sys.argv[2])
-@ -147,18 +195,20 @@ def main():
     sorted_lexicon = sorted_data[0]
     sorted_dict = sorted_data[1]
     list_of_reports = []
