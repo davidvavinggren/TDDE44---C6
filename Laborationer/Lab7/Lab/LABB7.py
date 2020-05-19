@@ -111,7 +111,7 @@ class Report(object):
 
     def comparer(self):
         """Skapa varning om ordet inte finns i lexikonet."""
-        print("¤ Looking for unknown words in {}".format(self.text_name))
+        print("¤ Looking for unknown words in {}.".format(self.text_name))
         row_number = 0
         # Ta varje rad och modifiera den.
         for row in self.text:
@@ -144,7 +144,7 @@ class Report(object):
         for spelling_warning in self.spelling_warnings:
             txt_file.write(spelling_warning.write_to_report() + "\n")
         run_time = time() - start_time
-        txt_file.write("Time to write report: " + str(run_time) + "\n")
+        txt_file.write("Time to write report: " + str(run_time) + ".\n")
         txt_file.write("*******************************" +
                        "*******************************" +
                        "***************************\n")
@@ -165,7 +165,7 @@ class Lexicon(object):
 
     def load_freq_data(self):
         """Skapa en lista och ett dict av lexikonet."""
-        print("¤ Reading lexicon {}".format(self.filepath))
+        print("¤ Reading lexicon {}.".format(self.filepath))
         file = open(self.filepath, encoding='utf-8')
         freq_data_list = []
         freq_data_dict = {}
